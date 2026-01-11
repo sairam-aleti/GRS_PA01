@@ -1,0 +1,15 @@
+# Ignore Binaries and Object files
+bin/
+obj/
+*.o
+*.out
+*.exe
+
+# Ignore Temporary Test Files (from our workers)
+*.tmp
+*.dat
+*.csv
+*.log
+
+# Ignore OS junk
+.DS_Store

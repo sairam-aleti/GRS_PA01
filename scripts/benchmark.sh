@@ -15,37 +15,33 @@ if [ ! -f "$BIN_DIR/process_mgr" ] || [ ! -f "$BIN_DIR/thread_mgr" ]; then
     exit 1
 fi
 
-# Create/Reset the CSV file with headers
-echo "Model,Type,Count,Time_Seconds" > "$RESULTS_FILE"
+# 1. SMART HEADER: Only create header if file doesn't exist
+if [ ! -f "$RESULTS_FILE" ]; then
+    echo "Model,Type,Count,Time_Seconds" > "$RESULTS_FILE"
+    echo "Created new results file: $RESULTS_FILE"
+else
+    echo "Appending to existing results file: $RESULTS_FILE"
+fi
 
 echo "Starting Benchmark for Roll No: MT25038..."
-echo "Saving results to: $RESULTS_FILE"
 
 # Define the test parameters
-# We use powers of 2 for scaling, plus '8' (your roll digit)
 COUNTS=(1 2 4 8 16 32 64)
 TYPES=("cpu" "mem" "io")
 
-
 # FUNCTION: Run Test
-# Arguments: $1=ModelName $2=Executable $3=Type $4=Count
-
 run_test() {
     local model=$1
     local exe=$2
     local type=$3
     local count=$4
 
-    # Print status to console (without newline) to show progress
     echo -n "Running $model | Type: $type | Count: $count ... "
 
-    # Run the program and capture output
-    # 2>&1 redirects stderr to stdout so we capture everything
+    # Run and capture
     output=$($exe $type $count 2>&1)
-
-    # Parse the time using grep and awk
-    # Expected output format: "[Manager] ... Total time: 0.1234 seconds."
-    # We grep for "Total time", then print the word immediately before "seconds"
+    
+    # Parse output for "Total time"
     time_taken=$(echo "$output" | grep "Total time" | awk '{print $(NF-1)}')
 
     if [ -z "$time_taken" ]; then
@@ -58,22 +54,28 @@ run_test() {
     fi
 }
 
+# SELECTION LOGIC: Check first argument ($1)
+MODE=${1:-all} # Default to "all" if no argument provided
 
-# MAIN LOOPS
-
-# Loop 1: Processes
-for t in "${TYPES[@]}"; do
-    for c in "${COUNTS[@]}"; do
-        run_test "Process" "$BIN_DIR/process_mgr" "$t" "$c"
+# Loop 1: Processes (Only if mode is 'all' or 'process')
+if [[ "$MODE" == "all" || "$MODE" == "process" ]]; then
+    echo "--- Benchmarking PROCESSES ---"
+    for t in "${TYPES[@]}"; do
+        for c in "${COUNTS[@]}"; do
+            run_test "Process" "$BIN_DIR/process_mgr" "$t" "$c"
+        done
     done
-done
+fi
 
-# Loop 2: Threads
-for t in "${TYPES[@]}"; do
-    for c in "${COUNTS[@]}"; do
-        run_test "Thread" "$BIN_DIR/thread_mgr" "$t" "$c"
+# Loop 2: Threads (Only if mode is 'all' or 'thread')
+if [[ "$MODE" == "all" || "$MODE" == "thread" ]]; then
+    echo "--- Benchmarking THREADS ---"
+    for t in "${TYPES[@]}"; do
+        for c in "${COUNTS[@]}"; do
+            run_test "Thread" "$BIN_DIR/thread_mgr" "$t" "$c"
+        done
     done
-done
+fi
 
 echo "------------------------------------------------"
 echo "Benchmark Complete."

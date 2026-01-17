@@ -13,7 +13,7 @@
 #include <pthread.h>    // The Pthread Library
 #include <time.h>
 #include <unistd.h>     // for getpid()
-#include "../include/workers.h"
+#include "../include/MT25038_Part_A_Workers.h"
 
 // Helper function to print usage instructions
 void print_usage(const char* prog_name) {

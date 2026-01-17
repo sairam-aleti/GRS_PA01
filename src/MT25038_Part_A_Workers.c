@@ -15,7 +15,8 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <string.h>
-#include "../include/workers.h"
+#include <pthread.h>
+#include "../include/MT25038_Part_A_Workers.h"
 
 
 // 1. CPU WORKER: Integer Prime Sieve
@@ -77,9 +78,11 @@ void run_mem_intensive(size_t limit) {
     // 3. SHUFFLE (The Setup)
     // We create a random linked list inside the array.
     // arr[0] -> holds index 500 -> arr[500] holds index 2...
-    srand(time(NULL)); 
+    unsigned int seed = time(NULL) ^ (getpid() << 16) ^ (long)pthread_self();
+    
     for (size_t i = num_elements - 1; i > 0; i--) {
-        size_t j = rand() % (i + 1);
+        // Use rand_r(&seed) instead of rand()
+        size_t j = rand_r(&seed) % (i + 1);
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;

@@ -7,7 +7,7 @@
 ---
 
 ##  Project Overview
-This project implements and benchmarks two concurrency models—**Multi-Processing (fork)** and **Multi-Threading (pthread)**—to analyze their scalability across CPU, Memory, and I/O intensive tasks.
+This project implements and benchmarks two concurrency modelsï¿½**Multi-Processing (fork)** and **Multi-Threading (pthread)**ï¿½to analyze their scalability across CPU, Memory, and I/O intensive tasks.
 
 The system is designed to measure:
 1.  **Scalability:** How execution time changes as the worker count increases (1 to 64).
@@ -86,3 +86,4 @@ Specific Usage:
 - Algorithm Optimization: The 'Prime Sieve' (CPU) and 'Pointer Chasing' (Mem) algorithms were refined with AI assistance to specifically target hardware bottlenecks (ALU latency vs. L3 Cache misses).
 - Debugging: AI assisted in diagnosing a "Lock Contention" bug in the rand() function, which initially caused poor thread performance. This was resolved by implementing rand_r() with thread-local seeds.
 - Data Visualization: The Python plotting script was generated to process the raw CSV data into comparative graphs.
+

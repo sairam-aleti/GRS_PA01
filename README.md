@@ -1,13 +1,13 @@
 # Process vs. Thread Scalability Analysis
 **Course:** Graduate Systems (CSE638) - PA01  
-**Name:** [Your Name]  
+**Name:** Sai Ram Reddy Aleti
 **Roll Number:** MT25038  
 **Date:** January 2026
 
 ---
 
 ##  Project Overview
-This project implements and benchmarks two concurrency models�**Multi-Processing (fork)** and **Multi-Threading (pthread)**�to analyze their scalability across CPU, Memory, and I/O intensive tasks.
+This project implements and benchmarks two concurrency models **Multi-Processing (fork)** and **Multi-Threading (pthread)** to analyze their scalability across CPU, Memory, and I/O intensive tasks.
 
 The system is designed to measure:
 1.  **Scalability:** How execution time changes as the worker count increases (1 to 64).

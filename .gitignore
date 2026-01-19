@@ -1,15 +1,20 @@
-# Ignore Binaries and Object files
+# --- Build Artifacts (Keep these ignored) ---
 bin/
 obj/
 *.o
 *.out
 *.exe
-
-# Ignore Temporary Test Files (from our workers)
 *.tmp
-*.dat
-*.csv
 *.log
 
-# Ignore OS junk
+# --- Python Junk ---
+__pycache__/
+venv/
+*.py[cod]
+
+# --- OS Junk ---
 .DS_Store
+Thumbs.db
+
+# --- ALLOW RESULTS (Important!) ---
+!results/*.csv

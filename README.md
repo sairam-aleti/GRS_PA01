@@ -2,7 +2,6 @@
 **Course:** Graduate Systems (CSE638) - PA01  
 **Name:** Sai Ram Reddy Aleti
 **Roll Number:** MT25038  
-**Date:** January 2026
 
 ---
 
@@ -78,12 +77,6 @@ Artifacts bin/process_mgr and bin/thread_mgr will be created.
 
    Output: Scalability graphs (PNG) are saved to the plots/ directory.
 
-##  AI Usage Declaration
-Compliance Statement: I, MT25038, declare that Generative AI tools were used in the development of this assignment in accordance with the course policy. I have verified all generated code and fully understand the implementation logic.
 
-Specific Usage:
-
-- Algorithm Optimization: The 'Prime Sieve' (CPU) and 'Pointer Chasing' (Mem) algorithms were refined with AI assistance to specifically target hardware bottlenecks (ALU latency vs. L3 Cache misses).
-- Debugging: AI assisted in diagnosing a "Lock Contention" bug in the rand() function, which initially caused poor thread performance. This was resolved by implementing rand_r() with thread-local seeds.
-- Data Visualization: The Python plotting script was generated to process the raw CSV data into comparative graphs.
-
+## 🔗 Repository
+**GitHub:** https://github.com/sairam-aleti/GRS_PA01
